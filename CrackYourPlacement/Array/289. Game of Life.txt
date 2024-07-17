@@ -1,0 +1,35 @@
+class Solution {
+public:
+    void gameOfLife(vector<vector<int>>& board) {
+       vector<vector<int>>dir{{0,1},{1,1},{1,0},{1,-1},{0,-1},{-1,-1},{-1,0},{-1,1}};
+        int m=board.size();
+        int n=board[0].size();
+     vector<vector<int>>matrix(m,vector<int>(n));
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                matrix[i][j]=board[i][j];
+            }
+        }
+        for(int i=0;i<m;i++){ 
+            for(int j=0;j<n;j++){
+                 int count=0;
+                 int new_i=i;
+                 int new_j=j;
+                 for(int d=0;d<8;d++){
+                     new_i+=dir[d][0];
+                     new_j+=dir[d][1];
+                     if((new_i>=0 && new_i<m)&&(new_j>=0&& new_j<n)){
+                         if(matrix[new_i][new_j]==1)
+                             count++;
+                        }
+                    new_i=i;
+                    new_j=j;
+                 }
+                if(count<2||count>3)
+                    board[i][j]=0;
+                if(count==3)
+                     board[i][j]=1;
+          }
+        }    
+    }
+};
